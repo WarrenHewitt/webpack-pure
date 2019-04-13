@@ -1,39 +1,55 @@
 [toc]
 
-# webpack-pure
+# webpack
 
 > 学习与实践webpack
 
-## webpack  
-安装 `webpack` `webpack-dev-server`; 若遇到提示安装 `webpack-cli` 安装即可
+## 安装  
+`npm install webpack webpack-dev-server`  
 
-安装完成后配置package.json
+若遇到提示安装 `webpack-cli` , 安装即可
+
+## 打包操作
+
+配置package.json脚本
 ```
 "scripts": {
-    "dev": "webpack-dev-server"
+  "build": "webpack"
+}
+```
+当配置文件不叫webpack.config.js 或不在根路径  可以用 --config ./some path 实现
+
+如果直接在命令行中执行该命令，会提示: webpack: command not found 所以放到该文件中执行
+
+## 启动本地开发
+配置package.json脚本
+```
+"scripts": {
+  "dev": "webpack-dev-server"
 }
 ```
 
-默认入口 `./src/index.js`
+- 没有添加配置文件时，默认入口 `./src/index.js`
 
 ---
 
-在不是根路由的情况下刷新页面，可能会不能获取到打包的js文件，这时就要配置publicPath
+## 插件
 
----
+**htmlWebpackPlugin :**
+
 使用html-webpack-plugin 插件时获取参数只能用 htmlWebpackPlugin  
 
----
-**热更新** 
+**BundleAnalyzerPlugin :**
 
-热更新的处理逻辑webpack已经封装好了，只要在应用的入口文件中添加以下代码  
-```javascript
-if (module.hot) {  
-  module.hot.accept();
+分析打包结果
+```
+{
+  generateStatsFile: 默认false，打开后在webpack打包的同时就会创建stats.json然后打开浏览器查看结果
 }
 ```
+---
 
-**vue-cli 脚手架打包出来的文字图标不显示**
+## vue-cli 脚手架打包出来的文字图标不显示
 
 修改webpack.base.conf.js 的
 ```js
@@ -46,6 +62,9 @@ if (module.hot) {
   }
 }
 ```
+
+## 配置
+详见 `webpack.config.js`
 
 ## 其它
 

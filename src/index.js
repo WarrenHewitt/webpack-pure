@@ -1,1 +1,1 @@
-document.body.appendChild('webpack test');
+document.getElementById('app').innerHTML = 'div content webpack'

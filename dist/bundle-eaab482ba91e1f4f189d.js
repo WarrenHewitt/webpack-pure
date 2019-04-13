@@ -77,23 +77,23 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "a/";
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./server.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./server.js":
-/*!*******************!*\
-  !*** ./server.js ***!
-  \*******************/
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("console.log(123333);\n\n//# sourceURL=webpack:///./server.js?");
+eval("document.getElementById('app').innerHTML = 'div content webpack'\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
