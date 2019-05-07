@@ -15,6 +15,11 @@ module.exports = {
         publicPath: "a/"
     },
 
+    /**
+     * @des 生成标记源码位置的 .map 文件，方便开发时调试 
+     */
+    devtool: 'inline-source-map',
+
     plugins: [
         new htmlWebpackPlugin({
             template: path.join(__dirname, 'public', 'index.html'),

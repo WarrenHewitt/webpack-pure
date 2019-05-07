@@ -21,6 +21,7 @@
 
 如果直接在命令行中执行该命令，会提示: webpack: command not found 所以放到该文件中执行
 
+
 ## 启动本地开发
 配置package.json脚本
 ```
@@ -32,6 +33,15 @@
 - 没有添加配置文件时，默认入口 `./src/index.js`
 
 ---
+
+**热更新** 
+
+热更新的处理逻辑webpack已经封装好了，只要在应用的入口文件中添加以下代码  
+```javascript
+if (module.hot) {  
+  module.hot.accept();
+}
+```
 
 ## 插件
 
@@ -49,24 +59,10 @@
 ```
 ---
 
-## vue-cli 脚手架打包出来的文字图标不显示
-
-修改webpack.base.conf.js 的
-```js
-{
-  test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-  loader: 'url-loader',
-  options: {
-    limit: 100000, // 这里的值改大一点
-    name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-  }
-}
-```
-
 ## 配置
 详见 `webpack.config.js`
 
-## 其它
+# 其它
 
 - Yeoman  
 npm install yo  
@@ -82,5 +78,8 @@ bower install jquery
 - grunt  
 npm install grunt-cli(command-line interface)  
 自动化，压缩，编译，单元测试，代码1（）.校验  
+
+
+# gulp
 
 
