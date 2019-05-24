@@ -43,7 +43,28 @@ if (module.hot) {
 }
 ```
 
-## 插件
+---
+
+## 配置
+
+- 部分配置说明见 `webpack.config.js`
+
+---
+
+- 模块外部化 
+
+使用cdn引入的模块，防止eslint报错等
+
+```js
+externals: {
+    importName: 'cdnExportName'
+    // importName： 在文件中要引用时所用 import anyName from 'importName'
+    // cdnExportName: 引入的cdn导出的模块名称，如高德的AMap等
+}
+```
+
+
+### 插件
 
 **htmlWebpackPlugin :**
 
@@ -57,10 +78,7 @@ if (module.hot) {
   generateStatsFile: 默认false，打开后在webpack打包的同时就会创建stats.json然后打开浏览器查看结果
 }
 ```
----
 
-## 配置
-详见 `webpack.config.js`
 
 # 其它
 
