@@ -5,7 +5,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = {
     mode: 'development',
-    entry: path.join(__dirname, 'src', 'index.js'),
+    entry: path.join(__dirname, 'src', 'a.js'),
     output: {
         filename: 'bundle-[hash].js',
         //path: path.resolve(__dirname, 'dist/assets'),
@@ -15,36 +15,38 @@ module.exports = {
         publicPath: "a/"
     },
 
+    mode: 'production',
+
     /**
      * @des 生成标记源码位置的 .map 文件，方便开发时调试 
      */
-    devtool: 'inline-source-map',
+    // devtool: 'inline-source-map',
 
-    plugins: [
-        new htmlWebpackPlugin({
-            template: path.join(__dirname, 'public', 'index.html'),
-            /**
-             * @desc 在html模板中调用参数 <%= htmlWebpackPlugin.options.title %>
-             */
-            title: 'title from hwp param'
-        }),
-        // new BundleAnalyzerPlugin({
-        //     analyzerPort: 8801
-        // })
-        // new webpack.HotModuleReplacementPlugin()
-    ],
+    // plugins: [
+    //     new htmlWebpackPlugin({
+    //         template: path.join(__dirname, 'public', 'index.html'),
+    //         /**
+    //          * @desc 在html模板中调用参数 <%= htmlWebpackPlugin.options.title %>
+    //          */
+    //         title: 'title from hwp param'
+    //     }),
+    //     // new BundleAnalyzerPlugin({
+    //     //     analyzerPort: 8801
+    //     // })
+    //     // new webpack.HotModuleReplacementPlugin()
+    // ],
 
-    devServer: {
-        port: 8800,
-        /**
-         * @desc 此项目中用于在地址栏直接输入地址跳转
-         */
-        historyApiFallback: true,
-        hotOnly: true,
-        hot:true
-        //contentBase: path.join(__dirname, "bundle"),
+    // devServer: {
+    //     port: 8800,
+    //     /**
+    //      * @desc 此项目中用于在地址栏直接输入地址跳转
+    //      */
+    //     historyApiFallback: true,
+    //     hotOnly: true,
+    //     hot:true
+    //     //contentBase: path.join(__dirname, "bundle"),
 
-    },
+    // },
 
 
     module: {
