@@ -5,18 +5,13 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = {
     mode: 'development',
-<<<<<<< HEAD:config/webpack.config.js
     entry: path.resolve(__dirname, '../src', 'index.js'),
-=======
-    entry: path.join(__dirname, 'src', 'a.js'),
->>>>>>> 410a67b6d8f25f1a76c08be268e5d3597b7e4dd2:webpack.config.js
     output: {
         filename: 'bundle-[hash].js',
         //path: path.resolve(__dirname, 'dist/assets'),
         path: path.join(__dirname, '../dist'),
     },
 
-<<<<<<< HEAD:config/webpack.config.js
     plugins: [
         new htmlWebpackPlugin({
             template: path.join(__dirname, '../public', 'index.html'),
@@ -32,9 +27,7 @@ module.exports = {
         })
         // new webpack.HotModuleReplacementPlugin()
     ],
-=======
     mode: 'production',
->>>>>>> 410a67b6d8f25f1a76c08be268e5d3597b7e4dd2:webpack.config.js
 
     /**
      * @des 生成标记源码位置的 .map 文件，方便开发时调试 
