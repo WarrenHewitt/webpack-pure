@@ -5,27 +5,26 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = {
     mode: 'development',
-    entry: path.join(__dirname, 'src', 'index.js'),
+    entry: path.resolve(__dirname, '../src', 'index.js'),
     output: {
         filename: 'bundle-[hash].js',
         //path: path.resolve(__dirname, 'dist/assets'),
-        /**
-         * @desc 在不是根路由的情况下刷新页面，可能会不能获取到打包的js文件，这时就要配置publicPath 
-         */
-        publicPath: "a/"
+        path: path.join(__dirname, '../dist'),
     },
 
     plugins: [
         new htmlWebpackPlugin({
-            template: path.join(__dirname, 'public', 'index.html'),
+            template: path.join(__dirname, '../public', 'index.html'),
             /**
              * @desc 在html模板中调用参数 <%= htmlWebpackPlugin.options.title %>
              */
             title: 'title from hwp param'
         }),
-        // new BundleAnalyzerPlugin({
-        //     analyzerPort: 8801
-        // })
+        new BundleAnalyzerPlugin({
+            analyzerPort: 8801,
+            analyzerMode: 'disabled',
+            generateStatsFile: true
+        })
         // new webpack.HotModuleReplacementPlugin()
     ],
 

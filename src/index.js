@@ -1,1 +1,1 @@
-document.getElementById('app').innerHTML = 'div content webpack'
+document.getElementById('app').innerHTML = 'div content webpack' + process.env.NODE_ENV

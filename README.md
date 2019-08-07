@@ -42,11 +42,9 @@
 **BundleAnalyzerPlugin :**
 
 分析打包结果
-```
-{
-  generateStatsFile: 默认false，打开后在webpack打包的同时就会创建stats.json然后打开浏览器查看结果
-}
-```
+
+- 只生成stats.json文件 `analyzerMode: 'disabled', generateStatsFile: true`
+- 再执行 `webpack-bundle-analyzer ./dist/stats.json`
 ---
 
 ## vue-cli 脚手架打包出来的文字图标不显示
@@ -64,7 +62,7 @@
 ```
 
 ## 配置
-详见 `webpack.config.js`
+详见 ./config/
 
 ## 其它
 
