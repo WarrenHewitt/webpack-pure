@@ -4,7 +4,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 // const webpack = require('webpack');
 
 module.exports = {
-    mode: 'development',
+    // mode: 'development',
     entry: path.resolve(__dirname, '../src', 'index.js'),
     output: {
         filename: 'bundle-[hash].js',
@@ -27,6 +27,9 @@ module.exports = {
         })
         // new webpack.HotModuleReplacementPlugin()
     ],
+    /**
+     * @des 当模式设置为 production时会自动压缩和混淆
+     */
     mode: 'production',
 
     /**
