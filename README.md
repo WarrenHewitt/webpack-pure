@@ -22,7 +22,7 @@
 如果直接在命令行中执行该命令，会提示: webpack: command not found 所以放到该文件中执行
 
 
-## 启动本地开发
+## 启动本地开发 webpack-dev-server
 配置package.json脚本
 ```
 "scripts": {
@@ -31,6 +31,7 @@
 ```
 
 - 没有添加配置文件时，默认入口 `./src/index.js`
+- 会自动将打包后的文件引入html文件中
 
 ---
 

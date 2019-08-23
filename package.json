@@ -4,8 +4,8 @@
   "description": "practice webpack",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config ./config/webpack.config.js",
-    "build": "webpack --config ./config/webpack.config.js",
+    "dev": "webpack-dev-server --config ./config/webpack.config.js --env.currentEnv=development",
+    "build": "webpack --config ./config/webpack.config.js --mode=production",
     "analyze": "webpack-bundle-analyzer ./dist/stats.json"
   },
   "repository": {
