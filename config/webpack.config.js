@@ -34,7 +34,7 @@ module.exports = (env, argv) => {
         },
 
         /** 
-         * 1. 当模式设置为 production时会自动压缩和混淆, development
+         * 1. 当模式设置为 production时会自动压缩和混淆, development不会
          * 2. 还有一种使用方式为在命令中： webpack --mode=development
          * 3. 设置不同模式时，会更改对应的 process.env.NODE_ENV 的值
          */
