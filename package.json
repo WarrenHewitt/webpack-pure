@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --config ./config/webpack.config.js --env.currentEnv=development",
     "build": "webpack --config ./config/webpack.config.js --mode=production",
-    "analyze": "webpack-bundle-analyzer ./dist/stats.json"
+    "analyze": "webpack-bundle-analyzer ./dist/a/stats.json"
   },
   "repository": {
     "type": "git",

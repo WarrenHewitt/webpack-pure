@@ -21,7 +21,6 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
  */
 
 module.exports = (env, argv) => {
-    console.log(JSON.stringify(argv));
     return {
         /**
          * @des 入口文件
@@ -47,8 +46,12 @@ module.exports = (env, argv) => {
                  * @desc 在html模板中调用参数 <%= htmlWebpackPlugin.options.title %>
                  */
                 title: 'title from hwp param',
-                currentEnv: env.currentEnv
+                currentEnv: process.env.NODE_ENV === 'development' ? env.currentEnv : ''
             }),
+            /**
+             * @des 分析打包结果
+             * 1. 只生成stats.json文件
+             */
             new BundleAnalyzerPlugin({
                 analyzerPort: 8801,
                 analyzerMode: 'disabled',
@@ -66,21 +69,7 @@ module.exports = (env, argv) => {
         /**
          * @des 生成标记源码位置的 .map 文件，方便开发时调试 ,none表示不生成.map
          */
-        // devtool: 'inline-source-map',
-
-        // plugins: [
-        //     new htmlWebpackPlugin({
-        //         template: path.join(__dirname, 'public', 'index.html'),
-        //         /**
-        //          * @desc 在html模板中调用参数 <%= htmlWebpackPlugin.options.title %>
-        //          */
-        //         title: 'title from hwp param'
-        //     }),
-        //     // new BundleAnalyzerPlugin({
-        //     //     analyzerPort: 8801
-        //     // })
-        //     // new webpack.HotModuleReplacementPlugin()
-        // ],
+        devtool: 'inline-source-map',
 
         // devServer: {
         //     port: 8800,

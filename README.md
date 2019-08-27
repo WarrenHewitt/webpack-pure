@@ -73,10 +73,14 @@ externals: {
 
 **BundleAnalyzerPlugin :**
 
-分析打包结果
+分析打包结果：
 
-- 只生成stats.json文件 `analyzerMode: 'disabled', generateStatsFile: true`
-- 再执行 `webpack-bundle-analyzer ./dist/stats.json`
+1. 先在插件中配置(查看webpack.config.js)
+
+2. 执行 `webpack-bundle-analyzer ./dist/stats.json`
+
+
+
 ---
 
 ## vue-cli 脚手架打包出来的文字图标不显示
