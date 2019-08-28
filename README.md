@@ -7,19 +7,19 @@
 ## 安装  
 `npm install webpack webpack-dev-server`  
 
-若遇到提示安装 `webpack-cli` , 安装即可
+若遇到提示安装 `webpack-cli` , 安装即可, 因为现在是将命令抽离
 
 ## 打包操作
 
-配置package.json脚本
+- 配置package.json脚本
 ```
 "scripts": {
   "build": "webpack"
 }
 ```
-当配置文件不叫webpack.config.js 或不在根路径  可以用 --config ./some path 实现
+- 当配置文件不叫webpack.config.js 或不在根路径  可以用 --config ./some path 实现
 
-如果直接在命令行中执行该命令，会提示: webpack: command not found 所以放到该文件中执行
+- 如果直接在命令行中执行打包命令，会提示: `webpack: command not found` 所以放到`package.json`文件中执行
 
 
 ## 启动本地开发 webpack-dev-server
@@ -48,7 +48,13 @@ if (module.hot) {
 
 ## 配置
 
-- 部分配置说明见 `webpack.config.js`
+- 部分配置说明见 `./config/webpack.config.js`
+
+```
+{
+  generateStatsFile: 默认false，打开后在webpack打包的同时就会创建stats.json然后打开浏览器查看结果
+}
+```
 
 ---
 
@@ -77,33 +83,12 @@ externals: {
 
 1. 先在插件中配置(查看webpack.config.js)
 
-2. 执行 `webpack-bundle-analyzer ./dist/stats.json`
+2. 生成 `webpack --profile --json > ./analyze/stats.json` 文件
 
+3. 执行 `webpack-bundle-analyzer ./analyze/stats.json` 分析
 
 
 ---
-
-## vue-cli 脚手架打包出来的文字图标不显示
-
-修改webpack.base.conf.js 的
-```js
-{
-  test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-  loader: 'url-loader',
-  options: {
-    limit: 100000, // 这里的值改大一点
-    name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-  }
-}
-```
-
-## 配置
-详见 ./config/
-```
-{
-  generateStatsFile: 默认false，打开后在webpack打包的同时就会创建stats.json然后打开浏览器查看结果
-}
-```
 
 # 其它
 

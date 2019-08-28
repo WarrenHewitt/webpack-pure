@@ -2,8 +2,10 @@ const path = require("path");
 const webpack = require("webpack");
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-// const webpack = require('webpack');
 
+/**
+ * @des 其它说明查阅 README
+ */
 
 /**
  * @des 返回一个函数，参考：https://webpack.js.org/configuration/configuration-types/#exporting-a-function
@@ -50,10 +52,10 @@ module.exports = (env, argv) => {
             }),
             /**
              * @des 分析打包结果
-             * 1. 只生成stats.json文件
              */
             new BundleAnalyzerPlugin({
                 analyzerPort: 8801,
+                /** @des server(运行server时就执行) disabled(一般采取这种方式，运行单独命令读取stats.json才启动分析服务)  */
                 analyzerMode: 'disabled',
                 generateStatsFile: true
             }),
