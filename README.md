@@ -58,26 +58,35 @@ if (module.hot) {
 
 ---
 
-- 模块外部化 
+- 使用cdn引入的模块
 
-使用cdn引入的模块，防止eslint报错等
+两种方式防止eslint报错： 1.在eslint配置文件中配置全局变量；2.使用如下的externals配置
+
+---
+
+若想重命名 cdn 导出的模块名称  即用到了 `import anyName from 'importName'`,就需要配置如下
+
+(externals 主要作用是 防止 import 的包，打包到 bundle 中)
 
 ```js
 externals: {
     importName: 'cdnExportName'
-    // importName： 在文件中要引用时所用 import anyName from 'importName'
-    // cdnExportName: 引入的cdn导出的模块名称，如高德的AMap等
+    /*
+    * 1. importName： 在文件中要引用时所用 import anyName from 'importName'
+    * 2. cdnExportName: 引入的cdn导出的模块名称，如高德的AMap等
+    * 3. 常规做法是将两个值设为一致
+    */
 }
 ```
 
 
 ### 插件
 
-**htmlWebpackPlugin :**
+- htmlWebpackPlugin
 
 使用html-webpack-plugin 插件时获取参数只能用 htmlWebpackPlugin  
 
-**BundleAnalyzerPlugin :**
+- BundleAnalyzerPlugin
 
 分析打包结果：
 
