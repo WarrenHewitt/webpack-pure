@@ -9,6 +9,9 @@
 
 若遇到提示安装 `webpack-cli` , 安装即可, 因为现在是将命令抽离
 
+[文档](https://webpack.js.org/guides/getting-started/#basic-setup)
+
+
 ## 打包操作
 
 - 配置package.json脚本
@@ -17,6 +20,8 @@
   "build": "webpack"
 }
 ```
+- 需要打包的文件放入 src 目录下 否则会报错
+
 - 当配置文件不叫webpack.config.js 或不在根路径  可以用 --config ./some path 实现
 
 - 如果直接在命令行中执行打包命令，会提示: `webpack: command not found` 所以放到`package.json`文件中执行
@@ -95,6 +100,17 @@ externals: {
 2. 生成 `webpack --profile --json > ./analyze/stats.json` 文件
 
 3. 执行 `webpack-bundle-analyzer ./analyze/stats.json` 分析
+
+
+### webpack-chain
+
+- 当项目的配置需要根据不同情况动态生成的时候
+
+- https://github.com/neutrinojs/webpack-chain
+
+```
+
+```
 
 
 ---
