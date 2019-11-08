@@ -20,7 +20,6 @@
   "build": "webpack"
 }
 ```
-- 需要打包的文件放入 src 目录下 否则会报错
 
 - 当配置文件不叫webpack.config.js 或不在根路径  可以用 --config ./some path 实现
 
@@ -31,10 +30,10 @@
 配置package.json脚本
 ```
 "scripts": {
-  "dev": "webpack-dev-server"
+  "dev": "webpack-dev-server --progress"
 }
 ```
-
+- process 命令显示进度
 - 没有添加配置文件时，默认入口 `./src/index.js`
 - 会自动将打包后的文件引入html文件中
 
@@ -108,7 +107,22 @@ externals: {
 
 - https://github.com/neutrinojs/webpack-chain
 
-```
+```js
+const path = require('path');
+const Config = require('webpack-chain');
+
+const config = new Config();
+
+config
+  // 这里的index 会替换filename中的name 
+  .entry('index')
+    .add(path.resolve(__dirname, './src/main.js'))
+    .end()
+  .output
+    .path(path.resolve(__dirname, './dist'))
+    .filename('[name].bundle.js');
+
+module.exports = config.toConfig();
 
 ```
 

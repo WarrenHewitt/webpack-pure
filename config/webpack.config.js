@@ -42,6 +42,7 @@ module.exports = (env, argv) => {
 
         plugins: [
             new htmlWebpackPlugin({
+                /** 模板地址 */
                 template: path.join(__dirname, '../public', 'index.html'),
                 /**
                  * @desc 在html模板中调用参数 <%= htmlWebpackPlugin.options.title %>
@@ -72,16 +73,21 @@ module.exports = (env, argv) => {
          */
         devtool: 'inline-source-map',
 
+
+        /**
+         * @des webpack-dev-server 相关配置
+         */
         // devServer: {
         //     port: 8800,
-        //     /**
-        //      * @desc 此项目中用于在地址栏直接输入地址跳转
-        //      */
+        //     /** 此项目中用于在地址栏直接输入地址跳转 */
         //     historyApiFallback: true,
         //     hotOnly: true,
         //     hot:true
         //     //contentBase: path.join(__dirname, "bundle"),
-
+        /** 开启 gzip 压缩 */
+        //     compress: true
+        /** 不输出打包信息 */
+        //     quiet: true
         // },
 
 
@@ -98,21 +104,26 @@ module.exports = (env, argv) => {
             //                 plugins: [['import', { libraryName: 'antd', style: 'css' }]]
             //             }
             //         }]
-            //     }, {
-            //         test: /\.css$/,
-            //         use: ['style-loader', 'css-loader']  //解析是从左到右
-            //     }, {
-            //         test: /\.scss$/,
-            //         use: ['style-loader', 'css-loader', {
-            //             loader: 'postcss-loader',
-            //             options: {
-            //                 plugins: function () { return [require('autoprefixer')] }
-            //             }
-            //         }, 'sass-loader']
-            //     }, {
-            //         test: /\.png$/i,
-            //         use: ['file-loader']
-            //     }
+            //     }, 
+            /** 参考 webpack sass-loader */
+            //   {
+            //     test: /\.s[ac]ss$/i,
+            //     include: ''
+            //     use: [
+            //       /** 创建 style 标签插入 html */
+            //       'style-loader',
+            //       /** 在js代码中使用import和require来导入css文件，如果css文件中包含@import和url()这两个语句就需要css-loader来处理 */
+            //       'css-loader',
+            //       // Compiles Sass to CSS
+            // {
+            //     loader: 'sass-loader',
+            //     options: {
+            //         // Prefer `dart-sass`
+            //         implementation: require('sass'),
+            //     },
+            // },
+            //     ],
+            //   }
             // ]
         }
     }
