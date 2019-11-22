@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./morePage/page1.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
+/***/ "./morePage/page1.js":
+/*!***************************!*\
+  !*** ./morePage/page1.js ***!
+  \***************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("document.getElementById('app').innerHTML = 'div content webpack' + \"development\"\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("var page1 = 123;\n\n//# sourceURL=webpack:///./morePage/page1.js?");
 
 /***/ })
 

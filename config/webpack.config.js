@@ -64,8 +64,18 @@ module.exports = (env, argv) => {
              */
             new webpack.DefinePlugin({
                 AUTHER: JSON.stringify('hewitt')
-            })
+            }),
+
             // new webpack.HotModuleReplacementPlugin()
+
+            /** gzip 参考 https://webpack.docschina.org/plugins/compression-webpack-plugin/ */
+            // new CompressionPlugin(),
+
+            /** 把css样式从js文件中提取到单独的css文件中（style-loader是将央视直接插入到html） */
+            // new MiniCssExtractPlugin({
+            //     filename: devMode ? '[name].css' : '[name].[hash].css',
+            //     chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+            // })
         ],
 
         /**
@@ -110,18 +120,19 @@ module.exports = (env, argv) => {
             //     test: /\.s[ac]ss$/i,
             //     include: ''
             //     use: [
-            //       /** 创建 style 标签插入 html */
+                    // loader: devMode ? 'style-loader': MiniCssExtractPlugin.loader
+            //       /** 调用打包到js中的css时，创建 style 标签插入 html，不是创建文件然后引入 */
             //       'style-loader',
             //       /** 在js代码中使用import和require来导入css文件，如果css文件中包含@import和url()这两个语句就需要css-loader来处理 */
             //       'css-loader',
-            //       // Compiles Sass to CSS
-            // {
-            //     loader: 'sass-loader',
-            //     options: {
-            //         // Prefer `dart-sass`
-            //         implementation: require('sass'),
-            //     },
-            // },
+                    // {
+                        // compiles Sass to CSS
+                    //     loader: 'sass-loader',
+                    //     options: {
+                    //         // Prefer `dart-sass`
+                    //         implementation: require('sass'),
+                    //     },
+                    // },
             //     ],
             //   }
             // ]
