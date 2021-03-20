@@ -26,7 +26,8 @@ module.exports = (env, argv) => {
         /**
          * @des 入口文件
          */
-        entry: path.resolve(__dirname, '../src', 'index.js'),
+        // entry: path.resolve(__dirname, '../src', 'index.js'),
+        entry: path.resolve(__dirname, '../src', 'photo.js'),
         output: {
             filename: 'bundle-[hash].js',
             //path: path.resolve(__dirname, 'dist/assets'),
@@ -43,7 +44,8 @@ module.exports = (env, argv) => {
         plugins: [
             new htmlWebpackPlugin({
                 /** 模板地址 */
-                template: path.join(__dirname, '../public', 'index.html'),
+                // template: path.join(__dirname, '../public', 'index.html'),
+                template: path.join(__dirname, '../public', 'photo.html'),
                 /**
                  * @desc 在html模板中调用参数 <%= htmlWebpackPlugin.options.title %>
                  */
@@ -71,7 +73,7 @@ module.exports = (env, argv) => {
             /** gzip 参考 https://webpack.docschina.org/plugins/compression-webpack-plugin/ */
             // new CompressionPlugin(),
 
-            /** 把css样式从js文件中提取到单独的css文件中（style-loader是将央视直接插入到html） */
+            /** 把css样式从js文件中提取到单独的css文件中（style-loader是将样式直接插入到html） */
             // new MiniCssExtractPlugin({
             //     filename: devMode ? '[name].css' : '[name].[hash].css',
             //     chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
