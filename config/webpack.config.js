@@ -41,6 +41,9 @@ module.exports = (env, argv) => {
         mode: 'development',
 
         plugins: [
+            /**
+             * @des  需要自动把打包的文件引入到 html 文件中 要用以下插件
+             */
             new htmlWebpackPlugin({
                 template: path.join(__dirname, '../public', 'index.html'),
                 /**
@@ -66,21 +69,8 @@ module.exports = (env, argv) => {
         /**
          * @des 生成标记源码位置的 .map 文件，方便开发时调试 ,none表示不生成.map
          */
-        // devtool: 'inline-source-map',
+        devtool: 'inline-source-map',
 
-        // plugins: [
-        //     new htmlWebpackPlugin({
-        //         template: path.join(__dirname, 'public', 'index.html'),
-        //         /**
-        //          * @desc 在html模板中调用参数 <%= htmlWebpackPlugin.options.title %>
-        //          */
-        //         title: 'title from hwp param'
-        //     }),
-        //     // new BundleAnalyzerPlugin({
-        //     //     analyzerPort: 8801
-        //     // })
-        //     // new webpack.HotModuleReplacementPlugin()
-        // ],
 
         // devServer: {
         //     port: 8800,
@@ -94,6 +84,24 @@ module.exports = (env, argv) => {
 
         // },
 
+        /**
+         * @dss resolve 配置webpack如何寻找模块对应的文件
+         * 参考 https://segmentfault.com/a/1190000013176083?utm_source=tag-newest
+         */
+        resolve: {
+            alias: {
+                componets: './src/components/' // 把 "导入" 语句里的components关键字替换成./src/components
+            },
+            // 引用文件时没有加后缀，会自动带上后缀去尝试访问文件是否存在,尝试过程中用到的后缀列表默认 .js .json 如果都找不到 就会报错
+            extensions: ['.ts', '.js']
+        },
+
+        /**
+         * @des 不监听某些文件
+         */
+        watchOptions: {
+            ignored: ' /node_modules/'
+        },
 
         module: {
             // rules: [

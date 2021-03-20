@@ -32,6 +32,7 @@
 
 - 没有添加配置文件时，默认入口 `./src/index.js`
 - 会自动将打包后的文件引入html文件中
+- 如果根目录没有 `index.html` 也没有指定 htmlWebpackPlugin 模板  那么启动后浏览器显示的是文件列表
 
 ---
 
@@ -79,20 +80,6 @@ externals: {
 - 再执行 `webpack-bundle-analyzer ./dist/stats.json`
 ---
 
-## vue-cli 脚手架打包出来的文字图标不显示
-
-修改webpack.base.conf.js 的
-```js
-{
-  test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-  loader: 'url-loader',
-  options: {
-    limit: 100000, // 这里的值改大一点
-    name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-  }
-}
-```
-
 ## 配置
 详见 ./config/
 ```
@@ -100,6 +87,18 @@ externals: {
   generateStatsFile: 默认false，打开后在webpack打包的同时就会创建stats.json然后打开浏览器查看结果
 }
 ```
+
+## babel 说明
+
+参考博客： https://juejin.im/post/6844904199554072583
+
+- babel将ECMAScript 2015+ 版本的代码分为了两种情况处理：
+    - 语法层： let、const、class、箭头函数等，这些需要在构建时进行转译，是指在语法层面上的转译
+    - api方法层：Promise、includes、map等，这些是在全局或者Object、Array等的原型上新增的方法，它们可以由相应es5的方式重新定义
+
+- presets 配置项表示的是一堆plugins的集合，他直接定义好了类似处理react，typescript等的preset， 处理的是语法上的
+
+- polyfill 的定义，他是把当前浏览器不支持的方法通过用支持的方法重写来获得支持，处理的是api方法层
 
 # 其它
 
