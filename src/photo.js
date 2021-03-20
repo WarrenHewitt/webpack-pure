@@ -29,16 +29,15 @@ p1.addEventListener('click', function() {
 
 document.querySelector('#export').addEventListener('click', function() {
     html2canvas(document.querySelector('.main'), { allowTaint: true }).then((canvas) => {
-        document.body.appendChild(canvas)
         var d = canvas.toDataURL('image/jpeg', 1)
         downloadFile(d)
     })
 })
 
-function downloadFile(url, download) {
+function downloadFile(url) {
     var aEle = document.createElement('a')
     aEle.setAttribute('href', url)
-    aEle.setAttribute('download', download || 'name') // 默认是文件原本名
+    aEle.setAttribute('download', 'duty-schedule') // 默认是文件原本名
     document.body.appendChild(aEle)
     aEle.click()
 }
