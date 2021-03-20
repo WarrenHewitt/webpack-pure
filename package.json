@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "webpack-dev-server --config ./config/webpack.config.js --env.currentEnv=development",
     "build": "webpack --config ./config/webpack.config.js --mode=production",
-    "analyze": "webpack-bundle-analyzer ./dist/stats.json"
+    "buildM": "webpack --config ./config/morePage.js --mode=development",
+    "analyze": "webpack-bundle-analyzer ./analyze/stats.json",
+    "stats": "webpack --profile --json > ./analyze/stats.json"
   },
   "repository": {
     "type": "git",

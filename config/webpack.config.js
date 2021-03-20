@@ -2,8 +2,10 @@ const path = require("path");
 const webpack = require("webpack");
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-// const webpack = require('webpack');
 
+/**
+ * @des 其它说明查阅 README
+ */
 
 /**
  * @des 返回一个函数，参考：https://webpack.js.org/configuration/configuration-types/#exporting-a-function
@@ -19,14 +21,13 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
         "$0": "node_modules\\webpack-dev-server\\bin\\webpack-dev-server.js" 
     }
  */
-
 module.exports = (env, argv) => {
-    console.log(JSON.stringify(argv));
     return {
         /**
          * @des 入口文件
          */
-        entry: path.resolve(__dirname, '../src', 'index.js'),
+        // entry: path.resolve(__dirname, '../src', 'index.js'),
+        entry: path.resolve(__dirname, '../src', 'photo.js'),
         output: {
             filename: 'bundle-[hash].js',
             //path: path.resolve(__dirname, 'dist/assets'),
@@ -34,7 +35,7 @@ module.exports = (env, argv) => {
         },
 
         /** 
-         * 1. 当模式设置为 production时会自动压缩和混淆, development不会
+         * 1. 当模式设置为 production 时会自动压缩和混淆, development不会
          * 2. 还有一种使用方式为在命令中： webpack --mode=development
          * 3. 设置不同模式时，会更改对应的 process.env.NODE_ENV 的值
          */
@@ -45,15 +46,21 @@ module.exports = (env, argv) => {
              * @des  需要自动把打包的文件引入到 html 文件中 要用以下插件
              */
             new htmlWebpackPlugin({
-                template: path.join(__dirname, '../public', 'index.html'),
+                /** 模板地址 */
+                // template: path.join(__dirname, '../public', 'index.html'),
+                template: path.join(__dirname, '../public', 'photo.html'),
                 /**
                  * @desc 在html模板中调用参数 <%= htmlWebpackPlugin.options.title %>
                  */
                 title: 'title from hwp param',
-                currentEnv: env.currentEnv
+                currentEnv: process.env.NODE_ENV === 'development' ? env.currentEnv : ''
             }),
+            /**
+             * @des 分析打包结果
+             */
             new BundleAnalyzerPlugin({
                 analyzerPort: 8801,
+                /** @des server(运行server时就执行) disabled(一般采取这种方式，运行单独命令读取stats.json才启动分析服务)  */
                 analyzerMode: 'disabled',
                 generateStatsFile: true
             }),
@@ -62,8 +69,18 @@ module.exports = (env, argv) => {
              */
             new webpack.DefinePlugin({
                 AUTHER: JSON.stringify('hewitt')
-            })
+            }),
+
             // new webpack.HotModuleReplacementPlugin()
+
+            /** gzip 参考 https://webpack.docschina.org/plugins/compression-webpack-plugin/ */
+            // new CompressionPlugin(),
+
+            /** 把css样式从js文件中提取到单独的css文件中（style-loader是将样式直接插入到html） */
+            // new MiniCssExtractPlugin({
+            //     filename: devMode ? '[name].css' : '[name].[hash].css',
+            //     chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+            // })
         ],
 
         /**
@@ -72,16 +89,20 @@ module.exports = (env, argv) => {
         devtool: 'inline-source-map',
 
 
+        /**
+         * @des webpack-dev-server 相关配置
+         */
         // devServer: {
         //     port: 8800,
-        //     /**
-        //      * @desc 此项目中用于在地址栏直接输入地址跳转
-        //      */
+        //     /** 此项目中用于在地址栏直接输入地址跳转 */
         //     historyApiFallback: true,
         //     hotOnly: true,
         //     hot:true
         //     //contentBase: path.join(__dirname, "bundle"),
-
+        /** 开启 gzip 压缩 */
+        //     compress: true
+        /** 不输出打包信息 */
+        //     quiet: true
         // },
 
         /**
@@ -116,21 +137,27 @@ module.exports = (env, argv) => {
             //                 plugins: [['import', { libraryName: 'antd', style: 'css' }]]
             //             }
             //         }]
-            //     }, {
-            //         test: /\.css$/,
-            //         use: ['style-loader', 'css-loader']  //解析是从左到右
-            //     }, {
-            //         test: /\.scss$/,
-            //         use: ['style-loader', 'css-loader', {
-            //             loader: 'postcss-loader',
-            //             options: {
-            //                 plugins: function () { return [require('autoprefixer')] }
-            //             }
-            //         }, 'sass-loader']
-            //     }, {
-            //         test: /\.png$/i,
-            //         use: ['file-loader']
-            //     }
+            //     }, 
+            /** 参考 webpack sass-loader */
+            //   {
+            //     test: /\.s[ac]ss$/i,
+            //     include: ''
+            //     use: [
+                    // loader: devMode ? 'style-loader': MiniCssExtractPlugin.loader
+            //       /** 调用打包到js中的css时，创建 style 标签插入 html，不是创建文件然后引入 */
+            //       'style-loader',
+            //       /** 在js代码中使用import和require来导入css文件，如果css文件中包含@import和url()这两个语句就需要css-loader来处理 */
+            //       'css-loader',
+                    // {
+                        // compiles Sass to CSS
+                    //     loader: 'sass-loader',
+                    //     options: {
+                    //         // Prefer `dart-sass`
+                    //         implementation: require('sass'),
+                    //     },
+                    // },
+            //     ],
+            //   }
             // ]
         }
     }
