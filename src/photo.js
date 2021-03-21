@@ -1,8 +1,6 @@
-var p1 = document.querySelector('#p1')
-
 function getFileFromLocal(callback) {
     var inputElement = document.querySelector('cusSelectPhoto')
-    
+
     if (inputElement) {
         /* 这里删除的原因是为了防止同一个页面有多个该功能，导致所有的input都挂载同一个回调方法 */
         inputElement.parentNode.removeChild(inputElement)
@@ -18,17 +16,22 @@ function getFileFromLocal(callback) {
     inputElement.click()
 }
 
-p1.addEventListener('click', function() {
-    var _this = this
-    
-    getFileFromLocal(function(res) {
-        var url = window.URL.createObjectURL(res[0]);
-        _this.setAttribute('style', 'background-image: url('+ url +');')
-    })
-})
+for (var i = 1; i < 11; i++) {
+    document.querySelector('#p'+ i).addEventListener('click', setImg)
+}
 
-document.querySelector('#export').addEventListener('click', function() {
-    html2canvas(document.querySelector('.main'), { allowTaint: true }).then((canvas) => {
+
+function setImg () {
+    var _this = this
+
+    getFileFromLocal(function (res) {
+        var url = window.URL.createObjectURL(res[0]);
+        _this.setAttribute('style', 'background-image: url(' + url + ');')
+    })
+}
+
+document.querySelector('#export').addEventListener('click', function () {
+    html2canvas(document.querySelector('.main'), { allowTaint: true,fromCenter: false }).then((canvas) => {
         var d = canvas.toDataURL('image/jpeg', 1)
         downloadFile(d)
     })
@@ -41,4 +44,3 @@ function downloadFile(url) {
     document.body.appendChild(aEle)
     aEle.click()
 }
-
