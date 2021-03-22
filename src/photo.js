@@ -16,7 +16,7 @@ function getFileFromLocal(callback) {
     inputElement.click()
 }
 
-for (var i = 1; i < 11; i++) {
+for (var i = 1; i < 2; i++) {
     document.querySelector('#p'+ i).addEventListener('click', setImg)
 }
 
@@ -31,7 +31,9 @@ function setImg () {
 }
 
 document.querySelector('#export').addEventListener('click', function () {
-    html2canvas(document.querySelector('.main'), { allowTaint: true,fromCenter: false }).then((canvas) => {
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+    html2canvas(document.querySelector('.main'), { allowTaint: true, dpi: 300, scrollY: 0, scrollX: 0, }).then((canvas) => {
         var d = canvas.toDataURL('image/jpeg', 1)
         downloadFile(d)
     })
